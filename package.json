@@ -1,7 +1,7 @@
 {
-  "name": "[libraryName]",
-  "version": "0.0.0",
-  "description": "",
+  "name": "mongoql",
+  "version": "0.0.2",
+  "description": "[![Build Status](https://travis-ci.org/[repositoryOwner]/[repositoryName].svg?branch=master)](https://travis-ci.org/[repositoryOwner]/[repositoryName]) [![License](https://badgen.net/github/license/[repositoryOwner]/[repositoryName])](./LICENSE) [![Library minified size](https://badgen.net/bundlephobia/min/[libraryName])](https://bundlephobia.com/result?p=[libraryName]) [![Library minified + gzipped size](https://badgen.net/bundlephobia/minzip/[libraryName])](https://bundlephobia.com/result?p=[libraryName])",
   "cdn": "dist/index.umd.js",
   "main": "dist/index.js",
   "types": "types/index.d.ts",
@@ -32,19 +32,20 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/[repositoryOwner]/[repositoryName].git"
+    "url": "git+https://github.com/jgtbz/mongoql.git"
   },
   "keywords": [
     "typescript",
     "boilerplate",
     "library"
   ],
-  "author": {
-    "name": "[authorFullName]"
-  },
+  "author": "Gabriel Braga",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/[repositoryOwner]/[repositoryName]/issues"
+    "url": "https://github.com/jgtbz/mongoql/issues"
   },
-  "homepage": "https://github.com/[repositoryOwner]/[repositoryName]#readme"
+  "homepage": "https://github.com/jgtbz/mongoql#readme",
+  "directories": {
+    "doc": "docs"
+  }
 }

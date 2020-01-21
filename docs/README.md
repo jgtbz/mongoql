@@ -1,4 +1,4 @@
-**[[libraryNameWithSpacesAndUpperCases]](README.md)**
+**[mongoql](README.md)**
 
 [Globals](README.md)
 
@@ -18,7 +18,7 @@
 
 Ƭ **NumberParseable**: *string | number | false | true & object*
 
-*Defined in [index.ts:4](https://github.com/VitorLuizC/typescript-library-boilerplate/blob/696db7f/src/index.ts#L4)*
+*Defined in [index.ts:4](https://github.com/jgtbz/mongoql/blob/dfb1eb6/src/index.ts#L4)*
 
 A Branded Type for values parseable to number.
 
@@ -28,7 +28,7 @@ A Branded Type for values parseable to number.
 
 ▸ **isNumberParseable**(`value`: unknown): *boolean*
 
-*Defined in [index.ts:23](https://github.com/VitorLuizC/typescript-library-boilerplate/blob/696db7f/src/index.ts#L23)*
+*Defined in [index.ts:23](https://github.com/jgtbz/mongoql/blob/dfb1eb6/src/index.ts#L23)*
 
 Check if value is parseable to number.
 

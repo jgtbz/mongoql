@@ -1,12 +1,12 @@
 /*!
- * [libraryName] v0.0.0
- * (c) [authorFullName]
+ * mongoql v0.0.2
+ * (c) Gabriel Braga
  * Released under the MIT License.
  */
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
   typeof define === 'function' && define.amd ? define(['exports'], factory) :
-  (global = global || self, factory(global['[libraryCammelCaseName]'] = {}));
+  (global = global || self, factory(global.mongoql = {}));
 }(this, function (exports) { 'use strict';
 
   /**

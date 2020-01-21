@@ -1,6 +1,6 @@
 /*!
- * [libraryName] v0.0.0
- * (c) [authorFullName]
+ * mongoql v0.0.2
+ * (c) Gabriel Braga
  * Released under the MIT License.
  */
 /**
