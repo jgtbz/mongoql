@@ -1,17 +1,13 @@
-# Unversioned files and folders.
-# References at https://git-scm.com/docs/gitignore.
-
-# Finder's configuration files (Mac).
+# Finder configuration files (Mac).
 .DS_Store
 
-# Node.js modules.
+# Node.js dependencies.
 node_modules/
 
-# NPM's lockfile & shrinkwrap.
-# We're using Yarn and it provides it's own lockfile.
-package-lock.json
-npm-shrinkwrap.json
-
-# Log's files.
+# Log files.
 *.log
 *.log.*
+
+# Generated sources & type definitions.
+dist/
+types/
