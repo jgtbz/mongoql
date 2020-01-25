@@ -35,7 +35,7 @@ This module has an UMD bundle available through JSDelivr and Unpkg CDNs.
 
 ## Usage
 
-```sh
+```js
 import MongoQL from 'mongoql';
 
 // Users Entity
