@@ -1,6 +1,6 @@
 # mongoql
 
-[![Build Status](https://travis-ci.org/jgtbz/mongoql.svg?branch=master)](https://travis-ci.org/jgtbz/mongoql)
+<!-- [![Build Status](https://travis-ci.org/jgtbz/mongoql.svg?branch=master)](https://travis-ci.org/jgtbz/mongoql) -->
 [![License](https://badgen.net/github/license/jgtbz/mongoql)](./LICENSE)
 [![Library minified size](https://badgen.net/bundlephobia/min/mongoql)](https://bundlephobia.com/result?p=mongoql)
 [![Library minified + gzipped size](https://badgen.net/bundlephobia/minzip/mongoql)](https://bundlephobia.com/result?p=mongoql)
@@ -34,6 +34,131 @@ This module has an UMD bundle available through JSDelivr and Unpkg CDNs.
 ```
 
 ## Usage
+
+```sh
+import MongoQL from 'mongoql';
+
+// Users Entity
+
+const UsersRelationships = {
+  address: [
+    [
+      'address',
+      MongoQL.hasOne({
+        from: 'addresses',
+        localField: '_id',
+        foreignField: 'user',
+        as: 'address'
+      })
+    ]
+  ],
+  products: [
+    [
+      'products',
+      MongoQL.hasMany({
+        from: 'products',
+        localField: '_id',
+        foreignField: 'user',
+        as: 'products'
+      })
+    ]
+  ]
+};
+
+const UsersQL = MongoQL.prepare({ relationships: UsersRelationships })
+
+const pipeline = UsersQL.pipeline({ fields: req.query.fields })
+
+// some req example
+const req = {
+  query: {
+    fields: 'name,address.zipcode,products.name'
+  }
+}
+
+[
+  {
+    "$lookup": {
+      "from": "addresses",
+      "let": {
+        "value": "$_id"
+      },
+      "pipeline": [
+        {
+          "$match": {
+            "$expr": {
+              "$eq": [
+                "$user",
+                "$$value"
+              ]
+            }
+          }
+        },
+        {
+          "$project": {
+            "zipcode": 1
+          }
+        }
+      ],
+      "as": "address"
+    }
+  },
+  {
+    "$unwind": {
+      "path": "$address",
+      "preserveNullAndEmptyArrays": true
+    }
+  },
+  {
+    "$lookup": {
+      "from": "products",
+      "let": {
+        "value": "$_id"
+      },
+      "pipeline": [
+        {
+          "$match": {
+            "$expr": {
+              "$eq": [
+                "$user",
+                "$$value"
+              ]
+            }
+          }
+        },
+        {
+          "$project": {
+            "name": 1
+          }
+        }
+      ],
+      "as": "products"
+    }
+  },
+  {
+    "$project": {
+      "name": 1,
+      "address.zipcode": 1,
+      "products.name": 1
+    }
+  }
+]
+
+// another req example
+const req = {
+  query: {
+    fields: 'name'
+  }
+}
+
+[
+  {
+    "$project": {
+      "name": 1
+    }
+  }
+]
+```
 
 ## Documentation
 

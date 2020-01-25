@@ -1,53 +1,45 @@
-// import MongoQL from './';
+import MongoQL from './';
 
-// describe('Core', () => {
-//   it('Users', () => {
-//     const relationships = {
-//       address: [
-//         [
-//           'address',
-//           MongoQL.hasOne({
-//             from: 'addresses',
-//             localField: '_id',
-//             foreignField: 'user',
-//             as: 'address'
-//           })
-//         ]
-//       ],
-//       products: [
-//         [
-//           'products',
-//           MongoQL.hasMany({
-//             from: 'products',
-//             localField: '_id',
-//             foreignField: 'user',
-//             as: 'products'
-//           })
-//         ]
-//       ]
-//     };
+describe('Core', () => {
+  it('Users', () => {
+    const relationships = {
+      address: [
+        [
+          'address',
+          MongoQL.hasOne({
+            from: 'addresses',
+            localField: '_id',
+            foreignField: 'user',
+            as: 'address'
+          })
+        ]
+      ],
+      products: [
+        [
+          'products',
+          MongoQL.hasMany({
+            from: 'products',
+            localField: '_id',
+            foreignField: 'user',
+            as: 'products'
+          })
+        ]
+      ]
+    };
 
-//     const formatters = {
-//       name: MongoQL.filtersFormatters.string('name')
-//     };
+    const UsersQL = MongoQL.prepare({
+      relationships
+    });
 
-//     const UsersQL = MongoQL.prepare({
-//       relationships,
-//       filtersFormatters: formatters
-//     });
+    const fields = 'name';
 
-//     const fields = 'name,address.zipcode,products.name';
-//     const filters = {
-//       name: 'João'
-//     };
+    const pipeline = UsersQL.pipeline({ fields });
 
-//     const pipeline = UsersQL.pipeline({ fields, filters });
+    console.log(JSON.stringify(pipeline, null, 2));
 
-//     console.log(JSON.stringify(pipeline, null, 2));
-
-//     expect(2).toBe(2);
-//   });
-// });
+    expect(2).toBe(2);
+  });
+});
 
 // describe('buildProject', () => {
 
