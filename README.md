@@ -28,10 +28,12 @@ This module has an UMD bundle available through JSDelivr and Unpkg CDNs.
 <script src="https://cdn.jsdelivr.net/npm/mongoql"></script>
 
 <script>
-  // UMD module is exposed through the "[libraryCammelCaseName]" global variable.
-  console.log([libraryCammelCaseName]);
+  // UMD module is exposed through the "mongoql" global variable.
+  console.log(mongoql);
 </script>
 ```
+
+## Usage
 
 ## Documentation
 

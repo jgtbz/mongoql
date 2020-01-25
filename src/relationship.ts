@@ -9,15 +9,22 @@
  */
 
 export type Relationship = {
-  from: String,
-  localField: String,
-  foreignField: String,
-  as: String,
-  op: String,
-  pipeline: Array<Relationship>
-}
+  from: String;
+  localField: String;
+  foreignField: String;
+  as: String;
+  op?: String;
+  pipeline?: Relationship[];
+};
 
-const relationship = ({ from, localField = '_id', foreignField = '_id', as, op = 'eq', pipeline }: Relationship) => ({
+const relationship = ({
+  from,
+  localField = '_id',
+  foreignField = '_id',
+  as,
+  op = 'eq',
+  pipeline = []
+}: Relationship) => ({
   $lookup: {
     from,
     let: { value: `$${localField}` },
@@ -25,10 +32,7 @@ const relationship = ({ from, localField = '_id', foreignField = '_id', as, op =
       {
         $match: {
           $expr: {
-            [`$${op}`]: [
-              `$${foreignField}`,
-              '$$value'
-            ]
+            [`$${op}`]: [`$${foreignField}`, '$$value']
           }
         }
       },
@@ -36,6 +40,6 @@ const relationship = ({ from, localField = '_id', foreignField = '_id', as, op =
     ],
     as
   }
-})
+});
 
-export default relationship
+export default relationship;

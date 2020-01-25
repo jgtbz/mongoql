@@ -1,7 +1,7 @@
 {
   "name": "mongoql",
   "version": "0.0.2",
-  "description": "[![Build Status](https://travis-ci.org/[repositoryOwner]/[repositoryName].svg?branch=master)](https://travis-ci.org/[repositoryOwner]/[repositoryName]) [![License](https://badgen.net/github/license/[repositoryOwner]/[repositoryName])](./LICENSE) [![Library minified size](https://badgen.net/bundlephobia/min/[libraryName])](https://bundlephobia.com/result?p=[libraryName]) [![Library minified + gzipped size](https://badgen.net/bundlephobia/minzip/[libraryName])](https://bundlephobia.com/result?p=[libraryName])",
+  "description": "[![Build Status](https://travis-ci.org/jgtbz/mongoql.svg?branch=master)](https://travis-ci.org/jgtbz/mongoql) [![License](https://badgen.net/github/license/jgtbz/mongoql)](./LICENSE) [![Library minified size](https://badgen.net/bundlephobia/min/[libraryName])](https://bundlephobia.com/result?p=[libraryName]) [![Library minified + gzipped size](https://badgen.net/bundlephobia/minzip/[libraryName])](https://bundlephobia.com/result?p=[libraryName])",
   "cdn": "dist/index.umd.js",
   "main": "dist/index.js",
   "types": "types/index.d.ts",
