@@ -67,14 +67,14 @@ const UsersRelationships = {
 
 const UsersQL = MongoQL.prepare({ relationships: UsersRelationships })
 
-const pipeline = UsersQL.pipeline({ fields: req.query.fields })
-
 // some req example
 const req = {
   query: {
     fields: 'name,address.zipcode,products.name'
   }
 }
+
+const pipeline = UsersQL.pipeline({ fields: req.query.fields })
 
 [
   {
@@ -150,6 +150,8 @@ const req = {
     fields: 'name'
   }
 }
+
+const pipeline = UsersQL.pipeline({ fields: req.query.fields })
 
 [
   {
