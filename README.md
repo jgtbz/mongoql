@@ -257,8 +257,8 @@ const pipeline = UsersQL.pipeline({ fields: req.query.fields })
     "$match": {
       "name": "João",
       "createdAt": {
-        "$gt": "2020-01-01T00:00:00.000Z",
-        "$lt": "2020-01-10T00:00:00.000Z"
+        "$gte": "2020-01-01T00:00:00.000Z",
+        "$lte": "2020-01-10T00:00:00.000Z"
       }
     }
   },
