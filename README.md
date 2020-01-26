@@ -170,9 +170,107 @@ const pipeline = UsersQL.pipeline({ fields: req.query.fields })
 
 #### `with filters`
 
+```js
+const req = {
+  query: {
+    name: 'João',
+    'address.zipcode': '00000-000',
+    fields: 'name,address.zipcode'
+  }
+}
+
+const pipeline = UsersQL.pipeline({ fields: req.query.fields })
+
+[
+  {
+    "$match": {
+      "name": "João"
+    }
+  },
+  {
+    "$lookup": {
+      "from": "addresses",
+      "let": {
+        "value": "$_id"
+      },
+      "pipeline": [
+        {
+          "$match": {
+            "$expr": {
+              "$eq": [
+                "$user",
+                "$$value"
+              ]
+            }
+          }
+        },
+        {
+          "$match": {
+            "zipcode": "00000-000"
+          }
+        },
+        {
+          "$project": {
+            "zipcode": 1
+          }
+        }
+      ],
+      "as": "address"
+    }
+  },
+  {
+    "$unwind": {
+      "path": "$address",
+      "preserveNullAndEmptyArrays": true
+    }
+  },
+  {
+    "$project": {
+      "name": 1,
+      "address.zipcode": 1
+    }
+  }
+]
+```
+
 #### `with helpers filters`
 
-#### `with custom filters`
+```js
+const filtersFormatters = {
+  createdAt: MongoQL.filtersFormatters.period('createdAt')
+}
+
+const UsersQL = MongoQL.prepare({ relationships, filtersFormatters })
+
+const req = {
+  query: {
+    name: 'João',
+    createdAt: '2020-01-01,2020-01-10',
+    fields: 'name,createdAt'
+  }
+}
+
+const pipeline = UsersQL.pipeline({ fields: req.query.fields })
+
+[
+  {
+    "$match": {
+      "name": "João",
+      "createdAt": {
+        "$gt": "2020-01-01",
+        "$lt": "2020-01-10"
+      }
+    }
+  },
+  {
+    "$project": {
+      "name": 1,
+      "createdAt": 1
+    }
+  }
+]
+
+```
 
 ## Documentation
 
