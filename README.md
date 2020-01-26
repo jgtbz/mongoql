@@ -66,8 +66,11 @@ const UsersRelationships = {
 };
 
 const UsersQL = MongoQL.prepare({ relationships: UsersRelationships })
+```
 
-// some req example
+#### `with relationships`
+
+```js
 const req = {
   query: {
     fields: 'name,address.zipcode,products.name'
@@ -143,8 +146,11 @@ const pipeline = UsersQL.pipeline({ fields: req.query.fields })
     }
   }
 ]
+```
 
-// another req example
+#### `without relationships`
+
+```js
 const req = {
   query: {
     fields: 'name'
@@ -161,6 +167,12 @@ const pipeline = UsersQL.pipeline({ fields: req.query.fields })
   }
 ]
 ```
+
+#### `with filters`
+
+#### `with helpers filters`
+
+#### `with custom filters`
 
 ## Documentation
 
