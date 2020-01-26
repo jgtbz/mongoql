@@ -27,13 +27,22 @@ describe('Core', () => {
       ]
     };
 
+    const filtersFormatters = {
+      createdAt: MongoQL.filtersFormatters.period('createdAt')
+    };
+
     const UsersQL = MongoQL.prepare({
-      relationships
+      relationships,
+      filtersFormatters
     });
 
+    const filters = {
+      name: 'João',
+      createdAt: '2020-01-01,2020-01-10'
+    };
     const fields = 'name';
 
-    const pipeline = UsersQL.pipeline({ fields });
+    const pipeline = UsersQL.pipeline({ fields, filters });
 
     console.log(JSON.stringify(pipeline, null, 2));
 

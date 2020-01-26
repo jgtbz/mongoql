@@ -1,6 +1,6 @@
 const same = (key: string) => (value: string) => ({
   key,
-  value: value
+  value
 });
 
 const string = (key: string) => (value: string) => ({
@@ -18,8 +18,8 @@ const period = (key: string) => (value: string) => {
   return {
     key,
     value: {
-      $gt: start,
-      $lt: end
+      $gte: new Date(start),
+      $lte: new Date(end)
     }
   };
 };

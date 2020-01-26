@@ -9,9 +9,9 @@
 //   formatters: Object
 // }
 
-const buildFilters = ({ filters = {}, formatters }: any) => {
+const buildFilters = ({ filters = {}, formatters = {} }: any) => {
   const transform = (key: any, value: any) =>
-    (formatters[key] || ((value: any) => value))(value);
+    (formatters[key] || ((value: any) => ({ key, value })))(value);
 
   return Object.entries(filters)
     .map(([key, value]) => transform(key, value))
