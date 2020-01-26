@@ -35,10 +35,8 @@ This module has an UMD bundle available through JSDelivr and Unpkg CDNs.
 
 ## Usage
 
-```sh
+```js
 import MongoQL from 'mongoql';
-
-// Users Entity
 
 const UsersRelationships = {
   address: [
@@ -66,8 +64,11 @@ const UsersRelationships = {
 };
 
 const UsersQL = MongoQL.prepare({ relationships: UsersRelationships })
+```
 
-// some req example
+#### `with relationships`
+
+```js
 const req = {
   query: {
     fields: 'name,address.zipcode,products.name'
@@ -143,8 +144,11 @@ const pipeline = UsersQL.pipeline({ fields: req.query.fields })
     }
   }
 ]
+```
 
-// another req example
+#### `without relationships`
+
+```js
 const req = {
   query: {
     fields: 'name'
@@ -160,6 +164,110 @@ const pipeline = UsersQL.pipeline({ fields: req.query.fields })
     }
   }
 ]
+```
+
+#### `with filters`
+
+```js
+const req = {
+  query: {
+    name: 'João',
+    'address.zipcode': '00000-000',
+    fields: 'name,address.zipcode'
+  }
+}
+
+const pipeline = UsersQL.pipeline({ fields: req.query.fields })
+
+[
+  {
+    "$match": {
+      "name": "João"
+    }
+  },
+  {
+    "$lookup": {
+      "from": "addresses",
+      "let": {
+        "value": "$_id"
+      },
+      "pipeline": [
+        {
+          "$match": {
+            "$expr": {
+              "$eq": [
+                "$user",
+                "$$value"
+              ]
+            }
+          }
+        },
+        {
+          "$match": {
+            "zipcode": "00000-000"
+          }
+        },
+        {
+          "$project": {
+            "zipcode": 1
+          }
+        }
+      ],
+      "as": "address"
+    }
+  },
+  {
+    "$unwind": {
+      "path": "$address",
+      "preserveNullAndEmptyArrays": true
+    }
+  },
+  {
+    "$project": {
+      "name": 1,
+      "address.zipcode": 1
+    }
+  }
+]
+```
+
+#### `with helpers filters`
+
+```js
+const filtersFormatters = {
+  createdAt: MongoQL.filtersFormatters.period('createdAt')
+}
+
+const UsersQL = MongoQL.prepare({ relationships, filtersFormatters })
+
+const req = {
+  query: {
+    name: 'João',
+    createdAt: '2020-01-01,2020-01-10',
+    fields: 'name,createdAt'
+  }
+}
+
+const pipeline = UsersQL.pipeline({ fields: req.query.fields })
+
+[
+  {
+    "$match": {
+      "name": "João",
+      "createdAt": {
+        "$gte": "2020-01-01T00:00:00.000Z",
+        "$lte": "2020-01-10T00:00:00.000Z"
+      }
+    }
+  },
+  {
+    "$project": {
+      "name": 1,
+      "createdAt": 1
+    }
+  }
+]
+
 ```
 
 ## Documentation
