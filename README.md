@@ -176,8 +176,9 @@ const req = {
     fields: 'name,address.zipcode'
   }
 }
+const { fields, ...filters } = req.query
 
-const pipeline = UsersQL.pipeline({ fields: req.query.fields })
+const pipeline = UsersQL.pipeline({ fields, filters })
 
 [
   {
@@ -247,8 +248,9 @@ const req = {
     fields: 'name,createdAt'
   }
 }
+const { fields, ...filters } = req.query
 
-const pipeline = UsersQL.pipeline({ fields: req.query.fields })
+const pipeline = UsersQL.pipeline({ fields, filters })
 
 [
   {
