@@ -36,7 +36,7 @@ This module has an UMD bundle available through JSDelivr and Unpkg CDNs.
 ## Usage
 
 ```js
-import MongoQL from 'mongoql';
+import MongoQL from 'mongoql'
 
 const UsersRelationships = {
   address: [
@@ -61,7 +61,7 @@ const UsersRelationships = {
       })
     ]
   ]
-};
+}
 
 const UsersQL = MongoQL.prepare({ relationships: UsersRelationships })
 ```
@@ -269,7 +269,6 @@ const pipeline = UsersQL.pipeline({ fields, filters })
     }
   }
 ]
-
 ```
 
 ## Documentation
